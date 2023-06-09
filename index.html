@@ -11,22 +11,32 @@
 </head>
 
 <body>
-    <div id="countdown" class="">Time:</div>
+    <header class="header">
+        <div id="highScore">High Score</div>
+        <div id="countdown" class="">Time:</div>
+    </header>
 
-    <section class="welcome">
-        <h1>JavaScript Quiz!</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-        <button id="btn-start" class="">START</button>
-        <button id="btn-stop" class="">STOP</button>
+    <section class="welcome"> <!-- info and start button */-->
+        <div>
+            <h1 class="title">JavaScript Quiz!</h1>
+            <p class="info">Press the Start button to begin!</p>
+            <button id="btn-start" class="">START</button>
+        </div>
     </section>
 
-    <section class="quiz">
+    
+
+    <section class="quiz"> <!--questions and answer options-->
         <h1 class="question"></h1>
         <ul class="answerList"></ul>
     </section>
 
-    <section class="endQuiz">
-        <h1>Quiz is over!</h1>
+    <section> <!--displays correct or incorrect after answer is chosen-->
+        <p id="checkAnswer"></p>
+    </section>
+
+    <section class="endQuiz"> <!--displays when quiz has ended-->
+        <h1>Quiz is done!</h1>
     </section>
 
 
