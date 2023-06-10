@@ -1,6 +1,14 @@
+:root {
+    --lightTeal: rgb(224, 251, 255);
+    --teal: rgb(79, 249, 255);
+    --purple: rgb(141, 68, 141);
+    --lightPurple: rgb(255, 151, 255);
+}
+
+
 * {
     background-color: black;
-    color: aliceblue;
+    color: var(--lightTeal);
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -12,8 +20,9 @@
 }
 
 .title {
-margin: 30px 0 80px 0;
-font-size: 50px;
+    color: var(--teal);
+    margin: 30px 0 80px 0;
+    font-size: 50px;
 }
 
 .info {
@@ -21,7 +30,21 @@ font-size: 50px;
     font-size: 17px;
 }
 
+.scoreBtn {
+    color: var(--lightPurple);
+    font-weight: bold;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#countdown {
+    color: var(--lightPurple);
+    font-weight: bold;
+    font-size: 20px;
+}
+
 #btn-start {
+    font-weight: bold;
     padding: 10px;
     border-radius: 5px;
 }
@@ -42,8 +65,9 @@ font-size: 50px;
 
 .answerStyle {
     width: 25%;
-    background-color: rgb(141, 68, 141);
-    color: aliceblue;
+    background-color: var(--purple);
+    /* color: aliceblue; */
+    color: var(--lightTeal);
     padding: 10px;
     margin: 10px;
     border-radius: 5px;

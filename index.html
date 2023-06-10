@@ -12,11 +12,18 @@
 
 <body>
     <header class="header">
-        <div id="highScore">High Score</div>
+        <div id="highScore"> <!--visible-->
+            <button class="scoreBtn">High Score</button>
+        </div>
+        
+        <div id="displayScore"> <!--hidden-->
+            <ul class="scoreList">Scores:</ul>
+        </div>
+        
         <div id="countdown" class="">Time:</div>
     </header>
 
-    <section class="welcome"> <!-- info and start button */-->
+    <section class="welcome"> <!-- info and start button -->
         <div>
             <h1 class="title">JavaScript Quiz!</h1>
             <p class="info">Press the Start button to begin!</p>
@@ -36,7 +43,7 @@
     </section>
 
     <section class="endQuiz"> <!--displays when quiz has ended-->
-        <h1>Quiz is done!</h1>
+        <h1 class="endMessage">Quiz is done!</h1>
     </section>
 
 

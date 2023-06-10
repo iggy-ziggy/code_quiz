@@ -1,10 +1,11 @@
+//start button
 var startBtn = document.querySelector("#btn-start");
-var stopBtn = document.querySelector("#btn-stop");
-
+//timer, high score, and welcome message
 var timerEl = document.querySelector("#countdown");
-
+var displayScore = document.querySelector("#displayScore");
+displayScore.style.display = "none";
 var welcome = document.querySelector(".welcome");
-
+//quiz body
 var quiz = document.querySelector(".quiz");
 quiz.style.display = "none"; //keeps sections hidden until called
 
@@ -15,7 +16,7 @@ var checkAnswer = document.querySelector("#checkAnswer");
 var endQuiz = document.querySelector(".endQuiz");
 endQuiz.style.display = "none"; //keeps sections hidden until called
 
-var timeLeft = 60;
+// var timeLeft = 60;
 
 var questionArr = [
     {
@@ -52,19 +53,29 @@ startBtn.addEventListener("click", function () {
 });
 
 function countdown() {
-    var timeLeft = 30;
-    var timeInterval = setInterval(function () {
-        if (timeLeft > 1) {
-            timerEl.innerHTML = timeLeft + " seconds"
-            timeLeft--;
-        } else if (timeLeft === 1) {
-            timerEl.innerHTML = timeLeft + " second"
-            timeLeft--;
-        } else {
-            timerEl.innerHTML = "GAME OVER";
-            clearInterval(timeInterval);
+    var timeLeft = 60;
+        timerEl.textContent = timeLeft;
+
+    var startTimer = setInterval(function() {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if(timeLeft <= 0) {
+            clearInterval(startTimer);
         }
-    }, 1000);
+    },1000);
+    // var timeLeft = 60;
+    // var timeInterval = setInterval(function () {
+    //     if (timeLeft > 1) {
+    //         timerEl.innerHTML = timeLeft + " seconds"
+    //         timeLeft--;
+    //     } else if (timeLeft === 1) {
+    //         timerEl.innerHTML = timeLeft + " second"
+    //         timeLeft--;
+    //     } else {
+    //         timerEl.innerHTML = "GAME OVER";
+    //         clearInterval(timeInterval);
+    //     }
+    // }, 1000);
 }
 
 var index = 0;
@@ -82,15 +93,18 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
         answerItem.innerHTML = i;
         answerList.append(answerItem) //appends answer to list
         console.log(answerItem);
-         //trying to add style to list items as they're generated - start here next time
         answerItem.addEventListener("click", function () {
             var clickedOn = answerItem.innerHTML; //targets which item was clicked
             if (clickedOn === questionArr[index].answer) {
                 console.log('Right!'); //need to add visible response for right and wrong answers
                 checkAnswer.innerHTML = "Correct!";
+                score++;
+                console.log(score);
             } else {
                 console.log("Wrong!");
                 checkAnswer.innerHTML = "Incorrect!";
+                // timeLeft -= 5; //trying to decrement timer - not working yet
+                // timerEl.textContent = timeLeft;
             }
             if(index >= questionArr.length - 1) {
                 console.log("game over");
@@ -101,6 +115,7 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
                 index++;
                 startQuiz(index);
             }
+            console.log("Current score is " + score);
         })
     })
 }
