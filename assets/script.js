@@ -4,6 +4,7 @@ var startBtn = document.querySelector("#btn-start");
 var timerEl = document.querySelector("#countdown");
 var displayScore = document.querySelector("#displayScore");
 displayScore.style.display = "none";
+var scoreList = document.querySelector("scoreList");
 var welcome = document.querySelector(".welcome");
 //quiz body
 var quiz = document.querySelector(".quiz");
@@ -120,9 +121,8 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
     })
 }
 //To Do: 
-//store score
-//create HTML element for displaying score
+//store/retrieve score
 //
-//decrement time on wrong answer
+//decrement time on wrong answer!!!
 //
 //game over function for getting rid of questions
