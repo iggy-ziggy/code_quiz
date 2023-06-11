@@ -2,9 +2,11 @@
 var startBtn = document.querySelector("#btn-start");
 //timer, high score, and welcome message
 var timerEl = document.querySelector("#countdown");
+timerEl.style.display = "none";
 var displayScore = document.querySelector("#displayScore");
 displayScore.style.display = "none";
 var scoreList = document.querySelector("scoreList");
+var initialInput = document.querySelector("initialInput");
 var welcome = document.querySelector(".welcome");
 //quiz body
 var quiz = document.querySelector(".quiz");
@@ -44,7 +46,7 @@ var questionArr = [
         question: "What happens when we die?",
         choices: ["Heaven", "Hell", "Void", "Unknown"],
         answer: "Unknown"
-    }
+    },
 ];
 
 startBtn.addEventListener("click", function () {
@@ -52,6 +54,8 @@ startBtn.addEventListener("click", function () {
     countdown();
     startQuiz(index);
 });
+
+//event listener for high score button
 
 function countdown() {
     var timeLeft = 60;
@@ -85,6 +89,7 @@ var score = 0;
 function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
     answerList.innerHTML = "";
     welcome.style.display = "none";
+    timerEl.style.display = "block";
     quiz.style.display = "block"; //makes hidden quiz visible
     question.innerHTML = questionArr[index].question; //retrieves question value
     var answerArr = questionArr[index].choices; //made another array out of question options
@@ -110,8 +115,10 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
             if(index >= questionArr.length - 1) {
                 console.log("game over");
                 index = 0;
+                timerEl.style.display = "none";
                 quiz.style.display = "none";
                 endQuiz.style.display = "block";
+                checkAnswer.style.display = "none";
             } else {
                 index++;
                 startQuiz(index);
@@ -119,10 +126,39 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
             console.log("Current score is " + score);
         })
     })
+    
 }
+
+function gameOver() {
+    timerEl.style.display = "none";
+}
+
+
+function scoreCard() {//enter initials
+    if(score > 0) {
+        alert("Please enter your initials!");
+    } else {
+        return;
+    }
+
+};
+
+function storeScore() {//store score and initials
+    var highScoreArr = []
+};
+
+function getScore() {//get score and initials, print to page
+
+};
+
+scoreCard();
 //To Do: 
 //store/retrieve score
 //
 //decrement time on wrong answer!!!
 //
 //game over function for getting rid of questions
+//
+//function to enter initials and show score
+//function to store score and initials
+//function to retrieve score and initials and print to page
