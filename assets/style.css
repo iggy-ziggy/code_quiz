@@ -76,3 +76,10 @@
 .endMessage {
     font-size: 40px;
 }
+
+.submitBtn {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: var(--lightPurple)
+}

@@ -1,5 +1,7 @@
-//start button
+//buttons
 var startBtn = document.querySelector("#btn-start");
+var submitBtn = document.querySelector(".submitBtn");
+var scoreBtn = document.querySelector(".scoreBtn");
 //timer, high score, and welcome message
 var timerEl = document.querySelector("#countdown");
 timerEl.style.display = "none";
@@ -16,49 +18,66 @@ var question = document.querySelector(".question");
 var answerList = document.querySelector(".answerList");
 var checkAnswer = document.querySelector("#checkAnswer");
 
+var endScore = document.querySelector("endScore");
 var endQuiz = document.querySelector(".endQuiz");
 endQuiz.style.display = "none"; //keeps sections hidden until called
+var initialForm = document.querySelector(".initialForm");
+initialForm.style.display = "none";
+var initialMsg = document.querySelector(".initialMsg");
+var initialInput = document.querySelector(".initialInput");
+var finalScoreEl = document.querySelector(".finalScore");
 
 // var timeLeft = 60;
 
 var questionArr = [
     {
-        question: "What color is the sky?",
-        choices: ["Brown", "Green", "Blue", "Yellow"],
-        answer: "Blue"
+        question: "Inside which HTML element do we put the JavaScript?",
+        choices: ["script", "scripting", "js", "javascript"],
+        answer: "script"
     },
     {
-        question: "What temp does water freeze at?",
-        choices: ["0", "32", "100", "5"],
-        answer: "32"
+        question: "Commonly used data types DO NOT include:",
+        choices: ["numbers", "booleans", "inputs", "strings"],
+        answer: "inputs"
     },
     {
-        question: "What is the opposite of up?",
-        choices: ["Down", "Left", "Right", "Under"],
-        answer: "Down"
+        question: "The first index of an array is:",
+        choices: ["0", "1", "null", "undefined"],
+        answer: "0"
     },
     {
-        question: "What color is coal?",
-        choices: ["Blue", "No color", "Red", "Black"],
-        answer: "Black"
+        question: "Which event occurs when the user clicks on an HTML element?",
+        choices: ["submit", "mouseover", "click", "mouseclick"],
+        answer: "click"
     },
     {
-        question: "What happens when we die?",
-        choices: ["Heaven", "Hell", "Void", "Unknown"],
-        answer: "Unknown"
+        question: "String values must be enclosed within _____ when being assigned to variables.",
+        choices: ["parentheses", "quotation marks", "curly brackets", "colons"],
+        answer: "quotation marks"
     },
 ];
 
-startBtn.addEventListener("click", function () {
+startBtn.addEventListener("click", function() {
     console.log("I've been clicked!");
     countdown();
     startQuiz(index);
 });
 
+submitBtn.addEventListener("submit", function(event) {
+    event.preventDefault();
+    scoreCard(event);
+    console.log("I'm submitted!");
+});
+
+scoreBtn.addEventListener("click", function(event) {
+    getScore(event);
+    console.log("Here are your scores!");
+})
+
 //event listener for high score button
 
 function countdown() {
-    var timeLeft = 60;
+    var timeLeft = 30;
         timerEl.textContent = timeLeft;
 
     var startTimer = setInterval(function() {
@@ -84,9 +103,11 @@ function countdown() {
 }
 
 var index = 0;
-var score = 0;
+var score = [];
+var initials = [];
 
 function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
+    initialForm.style.display = "none";
     answerList.innerHTML = "";
     welcome.style.display = "none";
     timerEl.style.display = "block";
@@ -97,7 +118,7 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
         var answerItem = document.createElement("li");
         answerItem.classList.add("answerStyle");
         answerItem.innerHTML = i;
-        answerList.append(answerItem) //appends answer to list
+        answerList.append(answerItem); //appends answer to list
         console.log(answerItem);
         answerItem.addEventListener("click", function () {
             var clickedOn = answerItem.innerHTML; //targets which item was clicked
@@ -105,7 +126,7 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
                 console.log('Right!'); //need to add visible response for right and wrong answers
                 checkAnswer.innerHTML = "Correct!";
                 score++;
-                console.log(score);
+                // console.log(score);
             } else {
                 console.log("Wrong!");
                 checkAnswer.innerHTML = "Incorrect!";
@@ -119,45 +140,58 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
                 quiz.style.display = "none";
                 endQuiz.style.display = "block";
                 checkAnswer.style.display = "none";
+                scoreCard();
             } else {
                 index++;
                 startQuiz(index);
             }
-            console.log("Current score is " + score);
+            // console.log("Current score is " + score);
         })
     })
     
 }
+// console.log(score);
+// function gameOver() {
+    // timerEl.style.display = "none";
+// }
 
-function gameOver() {
-    timerEl.style.display = "none";
-}
 
-
-function scoreCard() {//enter initials
-    if(score > 0) {
-        alert("Please enter your initials!");
+function scoreCard(event) {//enter initials
+    // event.preventDefault();
+    console.log("Your score is " + score);
+    var initials = [initialInput];
+    var initialItem = document.createElement("li");
+    
+    if (score > 0) {
+        initialForm.style.display = "block";
+        // initialMsg.textContent = "Your final score is " + score + "!";
+        finalScoreEl.textContent = score;
     } else {
-        return;
+        alert("Please try again!");
     }
 
+    if (initials !== null) {
+        console.log(initialItem);
+    }
+    console.log(initials);
+    // storeScore();
 };
 
-function storeScore() {//store score and initials
-    var highScoreArr = []
+function storeScore(event) {//store score and initials
+    event.preventDefault();
+
+    
 };
 
 function getScore() {//get score and initials, print to page
 
 };
 
-scoreCard();
+// scoreCard();
 //To Do: 
 //store/retrieve score
 //
 //decrement time on wrong answer!!!
-//
-//game over function for getting rid of questions
 //
 //function to enter initials and show score
 //function to store score and initials
