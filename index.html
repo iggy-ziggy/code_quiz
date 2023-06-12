@@ -15,12 +15,9 @@
         <div id="highScore"> <!--visible-->
             <button class="scoreBtn">High Score</button>
         </div>
-        
-        <div id="displayScore"> <!--hidden-->
-            <ul class="scoreList">Scores:</ul>
+        <div id="countdown" class="">
+            Time:
         </div>
-        
-        <div id="countdown" class="">Time:</div>
     </header>
 
     <section class="welcome"> <!-- info and start button -->
@@ -43,7 +40,23 @@
     </section>
 
     <section class="endQuiz"> <!--displays when quiz has ended-->
-        <h1 class="endMessage">Quiz is done!</h1>
+        <h1 class="endMessage">Complete!</h1>
+        <p class="endScore"></p>
+    </section>
+
+    <section class="initialForm">
+        <h2 class="initialMsg">Your final score is <span class="finalScore"></span></h2>
+        <form>
+            <p class="">Enter your initials: <input class="initialInput" type="text">
+            <button class="submitBtn">Submit</button>
+            </p>
+        </form>
+    </section>
+
+    <section>
+        <div id="displayScore"> <!--hidden-->
+            <ul class="highScoreList">Scores:</ul>
+        </div>
     </section>
 
 
