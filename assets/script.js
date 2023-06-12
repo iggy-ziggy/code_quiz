@@ -7,7 +7,8 @@ var timerEl = document.querySelector("#countdown");
 timerEl.style.display = "none";
 var displayScore = document.querySelector("#displayScore");
 displayScore.style.display = "none";
-var scoreList = document.querySelector("scoreList");
+var highScoreList = document.querySelector("highScoreList");
+// highScoreList.style.display = "none";
 var initialInput = document.querySelector("initialInput");
 var welcome = document.querySelector(".welcome");
 //quiz body
@@ -63,14 +64,15 @@ startBtn.addEventListener("click", function() {
     startQuiz(index);
 });
 
-submitBtn.addEventListener("submit", function(event) {
+submitBtn.addEventListener("click", function(event) {
     event.preventDefault();
-    scoreCard(event);
+    storeScore();
+    // console.log(initialInput.value);
     console.log("I'm submitted!");
 });
 
-scoreBtn.addEventListener("click", function(event) {
-    getScore(event);
+scoreBtn.addEventListener("click", function() {
+    getScores();
     console.log("Here are your scores!");
 })
 
@@ -156,11 +158,8 @@ function startQuiz(index) { //"fake" for loop, array index wasn't starting at 0
 // }
 
 
-function scoreCard(event) {//enter initials
-    // event.preventDefault();
+function scoreCard() {//enter initials
     console.log("Your score is " + score);
-    var initials = [initialInput];
-    var initialItem = document.createElement("li");
     
     if (score > 0) {
         initialForm.style.display = "block";
@@ -169,30 +168,70 @@ function scoreCard(event) {//enter initials
     } else {
         alert("Please try again!");
     }
-
-    if (initials !== null) {
-        console.log(initialItem);
-    }
-    console.log(initials);
-    // storeScore();
 };
 
-function storeScore(event) {//store score and initials
-    event.preventDefault();
-
+function storeScore() {//store score and initials
+    initialForm.style.display = "none";
     
+    if (initialInput.value === "") {
+        alert("Please enter your initials!");
+        return;
+    } 
+
+    // store scores into local storage
+    var savedHighScores = localStorage.getItem("high scores");
+    var scoresArray;
+
+    if (savedHighScores === null) {
+        scoresArray = [];
+    } else {
+        scoresArray = JSON.parse(savedHighScores)
+    }
+
+    var userScore = {
+        initials: initialInput.value,
+        score: score
+    };
+
+    console.log(userScore);
+    scoresArray.push(userScore);
+
+    // stringify array in order to store in local
+    var scoresArrayString = JSON.stringify(scoresArray);
+    window.localStorage.setItem("high scores", scoresArrayString);
+
+    getScores();
 };
 
-function getScore() {//get score and initials, print to page
+// function getScore() {//get score and initials, print to page
 
-};
+// };
+
+function getScores() {
+
+    initialForm.style.display = "none";
+    displayScore.style.display = "block";
+
+    var savedHighScores = localStorage.getItem("high scores");
+
+    // check local storage
+    if (savedHighScores === null) {
+        return;
+    }
+
+    var storedHighScores = JSON.parse(savedHighScores);
+
+    for (i = 0; i < storedHighScores.length; i++) {
+        var newHighScore = document.createElement("li");
+        newHighScore.textContent = storedHighScores[i].initials + ": " + storedHighScores[i].score;
+        scoreList.append(newHighScore);
+    }
+}
 
 // scoreCard();
 //To Do: 
-//store/retrieve score
+//retrieve score
 //
 //decrement time on wrong answer!!!
 //
-//function to enter initials and show score
-//function to store score and initials
 //function to retrieve score and initials and print to page
